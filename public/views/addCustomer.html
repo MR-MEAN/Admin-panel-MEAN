@@ -1,0 +1,58 @@
+<div data-ng-hide="false">
+	<div class="row">
+		<div class="col-md-12">
+			<h1 class="page-header">
+				Add Customer
+			</h1>
+			<ol class="breadcrumb">
+				<li>
+					<i class="fa fa-dashboard"></i>  <a data-ng-href="#/dashboard">Dashboard</a>
+				</li>
+				<li class="active">
+					<i class="fa fa-edit"></i> Add Customer
+				</li>
+			</ol>
+		</div>
+	</div>
+	<div>
+	<div class="alert alert-info" data-ng-show="errorMessage">
+		  {{messageContent}}
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			<form role="form" data-ng-submit="page_Form.$valid && addCustomer(content)" name="page_Form" novalidate>
+				
+				<div class="form-group" data-ng-class="{ 'has-error' : page_Form.username.$invalid && !page_Form.username.$pristine || page_Form.$submitted && page_Form.username.$invalid,'has-success' : page_Form.username.$valid }">
+					<label>Username</label>
+					<input type="text" class="form-control" name="username" data-ng-model="content.username" required>
+				</div>
+				
+				<div class="form-group " data-ng-class="{ 'has-error' : page_Form.name.$invalid && !page_Form.name.$pristine || page_Form.$submitted && page_Form.name.$invalid , 'has-success' : page_Form.name.$valid}">
+					<label>Name</label>
+					<input type="text" class="form-control" name='name' data-ng-model="content.name" required>
+				</div>
+				
+				<div class="form-group" data-ng-class="{ 'has-error' : page_Form.address.$invalid && !page_Form.address.$pristine || page_Form.$submitted && page_Form.address.$invalid , 'has-success' : page_Form.address.$valid}">
+					<label>Address</label>
+					<input type="text" class="form-control" name="address" data-ng-model="content.address" required>
+				</div>
+				
+				<div class="form-group" data-ng-class="{ 'has-error': page_Form.email.$invalid && !page_Form.email.$pristine || page_Form.$submitted && page_Form.email.$invalid, 'has-success' : page_Form.email.$valid}" >
+					<label>Email</label>
+					<input type="email" class="form-control" name="email" data-ng-model="content.email" required />
+				</div>	
+<!-- UPload file Div-->		
+				<div class="form-group" >
+					<img data-ng-src="images/customers/thumbnail/{{content.image}}" style="width:70px;height:70px">
+					<div class="btn btn-default" data-ng-file-select data-ng-file-change="upload($files)" data-ng-multiple="multiple">Upload Image</div>				
+				</div>			
+<!-- UPload file Div Closed-->				
+					<br>
+					<button data-ng-disabled="uploadProgressBtn" class="btn btn-primary" data-ng-click="cancelCustomer()"><i class="ace-icon fa fa-reply"></i>Cancel</button>
+					<button type="submit" class="btn btn-primary" data-ng-disabled="uploadProgressBtn">Submit</button>			
+			</form>			
+		</div>
+	</div>
+   </div>
+</div>
+

@@ -1,0 +1,98 @@
+<div class="row">
+    <div growl></div>
+    <div class="col-md-12">
+        <h1 class="page-header">
+			Categories
+		</h1>
+        <ol class="breadcrumb">
+            <li>
+                <i class="fa fa-dashboard"></i> <a data-ng-href="#/dashboard">Dashboard</a>
+            </li>
+            <li class="active">
+                <i class="fa fa-edit"></i> Categories
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-6">
+            <a class="btn btn-primary" data-ng-click="addCategory()">Add Category</a>
+        </div>
+         <div class="col-md-6">
+            <form role="form" data-ng-submit="pageChanged(1, search)" name="search_Form" novalidate>
+                <div class="col-md-4">
+                    <input type="text" class="form-control" name="search" data-ng-model="search">
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <h2></h2>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover table-striped" data-ng-show="dataLength">
+                <thead data-ng-show="noRecordFound">
+                    <tr class="success">
+                        <th><a href="" data-ng-click="test='name';reverse=!reverse">Main Categories</a></th>
+                        <th>Sub Categories</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="warning" dir-paginate="category in Categories | itemsPerPage: categoryPerPage | orderBy:test:reverse" total-items="totalCategories">
+                        <td>{{category.name}}</td>
+                        <td>
+                            <button class="btn btn-default" data-ng-click="getSubCategories(category)">View</button>    
+                        </td>
+                        <td>
+                            <a class="btn btn-default fa fa-edit" data-ng-click="shareDataForEdit(category)"></a>
+                            <a class="btn btn-danger fa fa-trash-o" href='javascript:void(0)' data-ng-click="remove(category)"></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div data-ng-if="loading">
+                <img data-ng-src="images/loading.gif">
+            </div>
+            <dir-pagination-controls on-page-change="pageChanged(newPageNumber, '')" template-url="views/dirPagination.tpl.html"></dir-pagination-controls>
+        </div>
+        <div class="alert alert-info" data-ng-hide="noRecordFound">
+            <p>No Record Found !</p>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <h2></h2>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover table-striped" data-ng-show="subCatLength">
+                <thead data-ng-show="noRecordFoundSubCat">
+                    <tr class="success">
+                        <th><a href="" >Sub Categories({{parentCategory}})</a></th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="warning" data-ng-repeat="subCategorie in subCategories">
+                        <td>{{subCategorie.name}}</td>
+                        <td>
+                            <a class="btn btn-default fa fa-edit" data-ng-click="subCatEdit(subCategorie)"></a>
+                            <a class="btn btn-danger fa fa-trash-o" href='javascript:void(0)' data-ng-click="removeSubCat(subCategorie)"></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div data-ng-if="subCatLoading">
+                <img data-ng-src="images/loading.gif">
+            </div>
+        </div>
+        <div class="alert alert-info" data-ng-hide="noRecordFoundSubCat">
+            <p>No Record Found !</p>
+        </div>
+    </div>
+</div>
+

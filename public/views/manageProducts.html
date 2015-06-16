@@ -1,0 +1,84 @@
+<div data-ng-hide="false">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="page-header">
+				 Product
+			</h1>
+            <ol class="breadcrumb">
+                <li>
+                    <i class="fa fa-dashboard"></i> <a data-ng-href="#/dashboard">Dashboard</a>
+                </li>
+                <li class="active">
+                    <i class="fa fa-edit"></i> Product
+                </li>
+            </ol>
+        </div>
+    </div>
+    <div>
+        <div class="alert alert-info" data-ng-show="errorMessage">
+            {{messageContent}}
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <form role="form" data-ng-submit="productForm.$valid && addProduct()" name="productForm" novalidate>
+
+                    <div class="form-group" data-ng-class="{ 'has-error' : productForm.product_name.$invalid && !productForm.product_name.$pristine || productForm.$submitted && productForm.product_name.$invalid,'has-success' : productForm.product_name.$valid }">
+                        <label>Name</label>
+                        <input type="text" class="form-control" name="product_name" data-ng-model="content.product_name" required>
+                    </div>
+                    <div class="form-group" data-ng-class="{ 'has-error' : productForm.price.$invalid && !productForm.price.$pristine || productForm.$submitted && productForm.price.$invalid,'has-success' : productForm.price.$valid }">
+                        <label>Price</label>
+                        <div class="input-group">
+							<span class="input-group-addon">$</span>
+							<input type="text" only-numbers class="form-control" name="price" data-ng-model="content.price" required>
+						</div>
+                    </div>
+                   <div class="form-group" data-ng-class="{ 'has-error' : productForm.category.$invalid && !productForm.category.$pristine || productForm.$submitted && productForm.category.$invalid,'has-success' : productForm.category.$valid }">
+						<label>Category</label>
+						<select class="form-control"  name="category" data-ng-model="selectCategory" data-ng-options="tab.name for tab in selectTab" data-ng-change="changeSelectBox()"required>
+							<option value="">-- choose Category --</option>
+						</select>
+					</div>
+                   <div class="form-group" data-ng-class="{ 'has-error' : productForm.subCategory.$invalid && !productForm.subCategory.$pristine || productForm.$submitted && productForm.subCategory.$invalid,'has-success' : productForm.subCategory.$valid }">
+						<label>Sub Category</label>
+						<select class="form-control"  name="subCategory" data-ng-model="selectSubCategory" data-ng-options="subTab.name for subTab in selectSubTab" required>
+							<option value="">-- choose Sub Category --</option>
+						</select>
+					</div>
+                   <div class="form-group" data-ng-class="{ 'has-error' : productForm.brand.$invalid && !productForm.brand.$pristine || productForm.$submitted && productForm.brand.$invalid,'has-success' : productForm.brand.$valid }">
+						<label>Brand</label>
+						<select class="form-control"  name="brand" data-ng-model="brand" data-ng-options="brands.brandName for brands in selectBrands" ng-change="testFunc()" required>
+							<option value="">-- choose brand --</option>
+						</select>
+					</div>
+                    <div class="form-group" data-ng-class="{ 'has-error' : productForm.description.$invalid && !productForm.description.$pristine || productForm.$submitted && productForm.description.$invalid,'has-success' : productForm.description.$valid }">
+                        <label>Description</label>
+                        <textarea class="form-control" rows="3" name="description" data-ng-model="content.description" required></textarea>
+                    </div>
+                    <div class="form-group" data-ng-class="{ 'has-error' : productForm.status.$invalid && !productForm.status.$pristine || productForm.$submitted && productForm.status.$invalid,'has-success' : productForm.status.$valid }">
+						<label>Status</label>
+						<select class="form-control" name="status" data-ng-model="content.status" required> 
+							<option value="">Select</option>
+							<option value="active">Active</option>
+							<option value="inactive">Inactive</option>
+						</select>
+					</div>
+					<div class="form-group" data-ng-class="{ 'has-error' : productForm.quantity.$invalid && !productForm.quantity.$pristine || productForm.$submitted && productForm.quantity.$invalid,'has-success' : productForm.quantity.$valid }">
+                        <label>Quantity</label>
+                        <input type="text" only-numbers class="form-control" name="quantity" data-ng-model="content.quantity" required>
+                    </div>
+                    <div class="form-group">
+                        <img data-ng-src="images/products/thumbnail/{{content.image}}" style="width:70px;height:70px">
+                        <div class="btn btn-default" data-ng-file-select data-ng-file-change="upload($files)" data-ng-multiple="multiple">Upload Image</div>
+                     <p ng-style="uploadProgress">
+						<progressbar class="progress-striped active" value="dynamic" type="{{type}}"><i ng-show="showWarning"></i></progressbar> 
+					</p>
+                    </div>
+                    <br>
+                    <button data-ng-disabled="uploadProgressBtn" class="btn btn-primary" data-ng-click="cancelProduct()"><i class="ace-icon fa fa-reply"></i>Cancel</button>
+                    <button type="submit" class="btn btn-primary" data-ng-disabled="uploadProgressBtn">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

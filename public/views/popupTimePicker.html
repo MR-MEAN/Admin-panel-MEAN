@@ -1,0 +1,33 @@
+<!--
+<div class='overlay' data-ng-show='timePopup' data-ng-click='timePopup=false'></div>
+-->
+<input type="text" name="time" data-ng-model="selectedTime" value="selectedTime">
+<div data-ng-show="timePopup" style="width:400px;height:200px;border:2px solid;z-index:10000;position:fixed; transform: translate(46%, -12%);background-color: #fff; ">
+    <hr/>
+    <form role="form" data-ng-submit="submitTime()" name="productForm">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-2">
+                    <label>Format</label>
+                    <select ng-model="myContent" ng-options="content.name for content in contents" ng-change="formatChange(myContent)"></select>
+                </div>
+                <div class="col-md-2">
+                    <label>Hour</label>
+                    <select data-ng-model="myHour" ng-options="hours.name for hours in hoursCount"></select>
+                </div>
+                <div class="col-md-2">
+                    <label>Minute</label>
+                    <select data-ng-model="myMinute" ng-options="minutes.name for minutes in minutesCount"></select>
+                </div>
+                <div class="col-md-2">
+                    <label>Meridiem</label>
+                    <select data-ng-model="myContentSet" ng-options="set.name for set in formatSet" ng-disabled="formatCheck"></select>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <hr/>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </form>
+ <div>

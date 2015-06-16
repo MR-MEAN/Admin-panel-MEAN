@@ -1,0 +1,42 @@
+<div data-ng-hide="false">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="page-header">
+				 Categories
+			</h1>
+            <ol class="breadcrumb">
+                <li>
+                    <i class="fa fa-dashboard"></i> <a data-ng-href="#/dashboard">Dashboard</a>
+                </li>
+                <li class="active">
+                    <i class="fa fa-edit"></i> Categories
+                </li>
+            </ol>
+        </div>
+    </div>
+    <div>
+        <div class="alert alert-info" data-ng-show="errorMessage">
+            {{messageContent}}
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <form role="form" data-ng-submit="productForm.$valid && addCategory(content)" name="productForm" novalidate>
+
+                    <div class="form-group" data-ng-class="{ 'has-error' : productForm.name.$invalid && !productForm.name.$pristine || productForm.$submitted && productForm.name.$invalid,'has-success' : productForm.name.$valid }">
+                        <label>Category Name</label>
+                        <input type="text" class="form-control" name="name" data-ng-model="content.name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Parent Category</label>
+						<select class="form-control" data-ng-model="selectedCategory" data-ng-options="category.name for category in parentCategories" data-ng-change="parentId()">
+							<option value="">-- choose Category --</option>
+						</select>
+                    </div>
+                    <br>
+                    <button  class="btn btn-primary" data-ng-click="cancelCategory()"><i class="ace-icon fa fa-reply"></i>Cancel</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

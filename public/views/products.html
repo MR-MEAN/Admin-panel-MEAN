@@ -1,0 +1,78 @@
+<div class="row">
+    <div growl></div>
+    <div class="col-md-12">
+        <h1 class="page-header">
+			Products
+		</h1>
+        <ol class="breadcrumb">
+            <li>
+                <i class="fa fa-dashboard"></i> <a data-ng-href="#/dashboard">Dashboard</a>
+            </li>
+            <li class="active">
+                <i class="fa fa-edit"></i> Products
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-6">
+            <a class="btn btn-primary" data-ng-click="addProduct()">Add Product</a>
+        </div>
+        <div class="col-md-6">
+            <form role="form" data-ng-submit="pageChanged(1, search)" name="search_Form" novalidate>
+                <div class="col-md-4">
+                    <input type="text" class="form-control" name="search" data-ng-model="search">
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <h2></h2>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover table-striped" data-ng-show="dataLength">
+                <thead data-ng-show="noRecordFound">
+                    <tr class="success">
+                        <th>Image</th>
+                        <th><a href="javascript:void(0)" data-ng-click="test='product_name';reverse=!reverse">Name</a></th>
+                        <th><a href="javascript:void(0)" data-ng-click="test='price';reverse=!reverse">Price</a></th>
+                        <th><a href="javascript:void(0)" data-ng-click="test='category';reverse=!reverse">category</a></th>
+                        <th><a href="javascript:void(0)" data-ng-click="test='description';reverse=!reverse">Description</a></th>
+                        <th><a href="javascript:void(0)" data-ng-click="test='quantity';reverse=!reverse">Quantity</a></th>
+                        <th><a href="javascript:void(0)" data-ng-click="test='brand';reverse=!reverse">Brand</a></th>
+                        <th><a href="javascript:void(0)" data-ng-click="test='status';reverse=!reverse">Status</a></th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="warning" dir-paginate="product in Products | itemsPerPage: productsPerPage | orderBy:test:reverse" total-items="totalProducts">
+                        <td><img data-ng-src="images/products/thumbnail/{{product.image}}" style="width:70px;height:70px"></td>
+                        <td>{{product.product_name}}</td>
+                        <td>{{product.price}}</td>
+                        <td>{{product.category}}</td>
+                        <td>{{product.description}}</td>
+                        <td>{{product.quantity}}</td>
+                        <td>{{product.brand}}</td>
+                        <td>{{product.status}}</td>
+                        <td>
+                            <a class="btn btn-default fa fa-edit" data-ng-click='shareDataForEdit(product)'></a>
+                            <a class="btn btn-danger fa fa-trash-o" href='javascript:void(0)' data-ng-click="remove(product)"></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div data-ng-if="loading">
+                <img data-ng-src="images/loading.gif">
+            </div>
+            <dir-pagination-controls on-page-change="pageChanged(newPageNumber, '')" template-url="views/dirPagination.tpl.html"></dir-pagination-controls>
+        </div>
+        <div class="alert alert-info" data-ng-hide="noRecordFound">
+            <p>No Record Found !</p>
+        </div>
+    </div>
+</div>

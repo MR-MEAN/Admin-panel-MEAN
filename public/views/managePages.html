@@ -1,0 +1,57 @@
+<div class="row">
+	<div class="col-md-12">
+		<h1 class="page-header">
+			Manage Pages
+		</h1>
+		<ol class="breadcrumb">
+			<li>
+				<i class="fa fa-dashboard"></i>  <a data-ng-href="#/dashboard">Dashboard</a>
+			</li>
+			<li class="active">
+				<i class="fa fa-edit"></i> Manage Pages
+			</li>
+		</ol>
+	</div>
+</div>
+<div class="alert alert-info" data-ng-show="message">
+      {{messageContent}}
+</div>
+<div class="row">
+	<div class="col-md-6">
+		<form role="form" data-ng-submit="page_Form.$valid && addPageContent(content)" name="page_Form" novalidate>
+			
+			<div class="form-group" data-ng-class="{ 'has-error' : page_Form.pageTitle.$invalid && !page_Form.pageTitle.$pristine || page_Form.$submitted && page_Form.pageTitle.$invalid,'has-success' : page_Form.pageTitle.$valid }">
+				<label>Page title</label>
+				<input type="text" class="form-control" name="pageTitle" data-ng-change="createUrl( content.pageTitle)" data-ng-model="content.pageTitle" required>
+			</div>
+			
+			<div class="form-group " data-ng-class="{ 'has-error' : page_Form.metaDescription.$invalid && !page_Form.metaDescription.$pristine || page_Form.$submitted && page_Form.metaDescription.$invalid , 'has-success' : page_Form.metaDescription.$valid}">
+				<label>Meta description</label>
+				<input type="text" class="form-control" name='metaDescription' data-ng-model="content.metaDescription" required>
+			</div>
+			
+			<div class="form-group" data-ng-class="{ 'has-error' : page_Form.metaKey.$invalid && !page_Form.metaKey.$pristine || page_Form.$submitted && page_Form.metaKey.$invalid , 'has-success' : page_Form.metaKey.$valid}">
+				<label>Meta Keywords</label>
+				<input type="text" class="form-control" name="metaKey" data-ng-model="content.metaKey" required>
+			</div>
+			
+			<div class="form-group">
+				<label for="disabledSelect">Page Url</label>
+				<input type="text" class="form-control" name="pageUrl" data-ng-model="content.pageUrl" disabled>
+			</div>
+			
+			<div id="ng-app" class="ng-scope">
+				<div class="container lighter">
+					<div text-angular ng-model="content.htmlContent" name="demo-editor" ta-text-editor-class="border-around container" ta-html-editor-class="border-around"></div>
+					</div>
+					<br>
+					<div class="container text-center lighter border-around">
+					</div>
+					<br>
+				</div>
+				<br>
+				<a class="btn btn-primary" data-ng-click="cancelPage()"><i class="ace-icon fa fa-reply"></i>Cancel</a>
+				<button type="submit" class="btn btn-primary">Submit</button>
+		</form>						
+	</div>
+</div>

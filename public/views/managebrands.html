@@ -1,0 +1,43 @@
+<div data-ng-hide="false">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="page-header">
+				 Brands
+			</h1>
+            <ol class="breadcrumb">
+                <li>
+                    <i class="fa fa-dashboard"></i> <a data-ng-href="#/dashboard">Dashboard</a>
+                </li>
+                <li class="active">
+                    <i class="fa fa-edit"></i> Brands
+                </li>
+            </ol>
+        </div>
+    </div>
+    <div>
+        <div class="alert alert-info" data-ng-show="errorMessage">
+            {{messageContent}}
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <form role="form" data-ng-submit="brandForm.$valid && addBrand()" name="brandForm" novalidate>
+
+                    <div class="form-group" data-ng-class="{ 'has-error' : brandForm.brandName.$invalid && !brandForm.brandName.$pristine || brandForm.$submitted && brandForm.brandName.$invalid,'has-success' : brandForm.brandName.$valid }">
+                        <label>Brand Name</label>
+                        <input type="text" class="form-control" name="brandName" data-ng-model="brandName" required>
+                    </div>
+                    <div class="form-group" data-ng-class="{ 'has-error' : brandForm.category.$invalid && !brandForm.category.$pristine || brandForm.$submitted && brandForm.category.$invalid,'has-success' : brandForm.category.$valid }">
+						<label>Category</label>
+						<select class="form-control"  name="category" multiple data-ng-model="selectCategory" data-ng-options="tab.name for tab in selectTab" required>
+						<option value="">-- choose Category --</option>
+						</select>
+					</div>
+                    <br>
+                    <button  class="btn btn-primary" data-ng-click="cancelBrand()"><i class="ace-icon fa fa-reply"></i>Cancel</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
